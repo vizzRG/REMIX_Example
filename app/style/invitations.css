@@ -33,3 +33,10 @@ body{
     font-weight: 700;
     color: orange;
 }
+
+#home{
+    text-decoration: none;
+    color: gold;
+    font-weight: 700;
+    font-size: large;
+}

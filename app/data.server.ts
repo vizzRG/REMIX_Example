@@ -35,3 +35,14 @@ export async function resendInvitation(invite: Invitation) {
   invitation.sentTime = Date.now();
   await writeInvitations(invitations);
 }
+//my code
+export async function updateInvitation(update: Invitation){
+  const invitations = await getInvitations();
+  const invitation = invitations.find((i)=> i.id === update.id)
+   if (!invitation) {
+    throw new Error("Missing invitation");
+  }
+  invitation.email = update.email;
+  invitation.sentTime = Date.now();
+  await writeInvitations(invitations)
+} 

@@ -52,6 +52,9 @@ export const action = async ({ request }: ActionArgs) => {
     await deleteInvitation(invitation);
     return redirect(request.url);
   }
+  if(formData.get("intent") === "edit"){
+    return redirect(`/invitations/${invitation.id}/edit`)
+  }
 };
 
 export default function Index() {
@@ -74,6 +77,7 @@ export default function Index() {
               <button type="submit" name="intent" value="delete">
                 Delete
               </button>
+              <button type="submit" name="intent" value="edit">Edit</button>
               <Link id="link" to={`/invitations/${invitation.id}`}>Details</Link>
             </Form>
           </li>
