@@ -21,12 +21,14 @@ export const links: LinksFunction = ()=>{
 export default function invite(){
 
     const data = useLoaderData<typeof loader>()
+    const time = new Date(data.sentTime).toLocaleTimeString()
+    console.log(time)
     return(
         <div className="details">
             <Link to={"/"} id="home">Go back to home</Link>
             <h1>Id : <span className="deatil">{data.id}</span></h1>
             <h2>Email : <span className="deatil">{data.email}</span></h2>
-            <h3>Time : <span className="deatil">{data.sentTime}</span></h3>
+            <h3>Time : <span className="deatil">{time}</span></h3>
         </div>
     )
 }

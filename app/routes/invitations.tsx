@@ -3,6 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import stylesheet from "~/style/invitations.css"
 import { Link } from "@remix-run/react";
+
 import {
   deleteInvitation,
   getInvitations,

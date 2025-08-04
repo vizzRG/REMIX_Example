@@ -5,7 +5,7 @@ import {
   type LoaderArgs,
   type LoaderFunction,
 } from "@remix-run/node";
-import { Form, Link, useLoaderData, useRouteError } from "@remix-run/react";
+import { Form, Link, useLoaderData, useRouteError,useNavigate } from "@remix-run/react";
 import { getInvitations } from "~/data.server";
 import stylesheet from "~/style/update.css";
 import { updateInvitation } from "~/data.server";
@@ -41,6 +41,7 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function edit() {
+  const navigate = useNavigate();
   const { id, email, sentTime } = useLoaderData<typeof loader>();
   console.log(id);
   return (
@@ -61,6 +62,7 @@ export default function edit() {
       <button type="submit" name="intent" value="update">
         Update
       </button>
+      <button onClick={()=>navigate(-1)} type="button" id="cancel">Cancel</button>
     </Form>
   );
 }

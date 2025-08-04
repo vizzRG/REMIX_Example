@@ -65,3 +65,7 @@ button:hover{
     font-weight: 700;
     font-size: large;
 }
+
+#cancel{
+    background-color: red;
+}
