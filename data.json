@@ -1,24 +1,14 @@
 {
   "invitations": [
     {
-      "id": "1",
-      "email": "bob@example.com",
-      "sentTime": 1641601211540
+      "id": "ma15nrjmpa8",
+      "email": "vishal@gmail.com",
+      "sentTime": 1754323224943
     },
     {
-      "id": "2",
-      "email": "kody@example.com",
-      "sentTime": 1641591131837
-    },
-    {
-      "id": "3",
-      "email": "hannah@example.com",
-      "sentTime": 1641593646553
-    },
-    {
-      "id": "4",
-      "email": "marty@example.com",
-      "sentTime": 1641598327077
+      "id": "jnimsjq7oko",
+      "email": "tyagi@gmail.com",
+      "sentTime": 1754323231662
     }
   ]
 }

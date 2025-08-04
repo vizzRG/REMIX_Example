@@ -17,7 +17,7 @@ export async function sendInvitation(email: Invitation["email"]) {
 }
 
 async function writeInvitations(invitations: Array<Invitation>) {
-  return fs.writeFile("./data.json", JSON.stringify({ invitations }, null, 2));
+  return fs.writeFile("./data.json", JSON.stringify({ invitations },null,2));
 }
 
 export async function deleteInvitation(invitation: Invitation) {

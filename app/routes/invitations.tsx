@@ -1,7 +1,8 @@
-import type { ActionArgs } from "@remix-run/node";
+import type { ActionArgs, LinksFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-
+import stylesheet from "~/style/invitations.css"
+import { Link } from "@remix-run/react";
 import {
   deleteInvitation,
   getInvitations,
@@ -9,6 +10,10 @@ import {
   sendInvitation,
 } from "~/data.server";
 
+export const links: LinksFunction = ()=>{
+  return [
+  {rel: "stylesheet", href : stylesheet},
+]}
 export const loader = async () => {
   return json({ invitations: await getInvitations() });
 };
@@ -16,7 +21,8 @@ export const loader = async () => {
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   if (formData.get("intent") === "send") {
-    const email = formData.get("email");
+    const email = formData.get("email")?.toString();
+    console.log(email)
     if (typeof email !== "string") {
       // you'll want to handle this in a real app...
       throw new Error("make sure you implement validation");
@@ -52,7 +58,7 @@ export default function Index() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div>
+    <div id="main">
       <h1>Invitations:</h1>
       <ul>
         {data.invitations.map((invitation) => (
@@ -68,6 +74,7 @@ export default function Index() {
               <button type="submit" name="intent" value="delete">
                 Delete
               </button>
+              <Link id="link" to={`/invitations/${invitation.id}`}>Details</Link>
             </Form>
           </li>
         ))}
