@@ -1,8 +1,21 @@
 import fs from "fs/promises";
+import { matchSorter } from "match-sorter";
 
 export type Invitation = { id: string; email: string; sentTime: number };
-export async function getInvitations(): Promise<Array<Invitation>> {
-  const data = JSON.parse(await fs.readFile("./data.json", "utf8"));
+
+export async function getInvitations(
+  query?: string | null
+): Promise<Array<Invitation>> {
+  let data = JSON.parse(await fs.readFile("./data.json", "utf8"));
+
+  if (query) {
+    const matches = data.invitations.filter((item:any) =>
+      Object.values(item).some((value) =>
+        String(value).toLowerCase().includes(query.toLowerCase())
+      )
+    );
+    return matches
+  }
   return data.invitations;
 }
 export async function sendInvitation(email: Invitation["email"]) {
@@ -17,7 +30,7 @@ export async function sendInvitation(email: Invitation["email"]) {
 }
 
 async function writeInvitations(invitations: Array<Invitation>) {
-  return fs.writeFile("./data.json", JSON.stringify({ invitations },null,2));
+  return fs.writeFile("./data.json", JSON.stringify({ invitations }, null, 2));
 }
 
 export async function deleteInvitation(invitation: Invitation) {
@@ -36,13 +49,13 @@ export async function resendInvitation(invite: Invitation) {
   await writeInvitations(invitations);
 }
 //my code
-export async function updateInvitation(update: Invitation){
+export async function updateInvitation(update: Invitation) {
   const invitations = await getInvitations();
-  const invitation = invitations.find((i)=> i.id === update.id)
-   if (!invitation) {
+  const invitation = invitations.find((i) => i.id === update.id);
+  if (!invitation) {
     throw new Error("Missing invitation");
   }
   invitation.email = update.email;
   invitation.sentTime = Date.now();
-  await writeInvitations(invitations)
-} 
+  await writeInvitations(invitations);
+}

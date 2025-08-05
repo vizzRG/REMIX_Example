@@ -28,13 +28,11 @@ export const loader: LoaderFunction = async ({ params }: LoaderArgs) => {
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
-  console.log(updates);
   const data = {
     id: updates.id.toString(),
     email: updates.email.toString(),
     sentTime: Date.now(),
   };
-  console.log(data);
 
   await updateInvitation(data);
   return redirect("/");
@@ -43,7 +41,6 @@ export const action = async ({ request }: ActionArgs) => {
 export default function edit() {
   const navigate = useNavigate();
   const { id, email, sentTime } = useLoaderData<typeof loader>();
-  console.log(id);
   return (
     <Form method="POST">
       <Link id="home" to={"/"}>Go to home</Link>

@@ -40,3 +40,14 @@ body{
     font-weight: 700;
     font-size: large;
 }
+
+#search-form{
+    line-height: 20px;
+}
+
+#ser{
+    width: 100%;
+    height: 30px;
+    border-radius: 8px;
+ 
+}
